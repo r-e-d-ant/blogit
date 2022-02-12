@@ -17,8 +17,8 @@
        <i @click="toggleMobileNav" class="bx bx-menu menu-icon" v-show="mobile"></i>
        <transition class="mobile-nav">
            <ul v-show="mobileNav">
-               <router-link class="link" to="#">Home</router-link>
-               <router-link class="link" to="#">Blogs</router-link>
+               <router-link class="link" :to="{ name: 'Home' }">Home</router-link>
+               <router-link class="link" :to="{ name: 'Blogs' }">Blogs</router-link>
                <router-link class="link" to="#">Create Post</router-link>
                <router-link class="link" to="#">Login/Register</router-link>
             </ul>
