@@ -1,5 +1,7 @@
 # blogit
 
+## -- Under Development --
+
 ## Project setup
 ```
 npm install
