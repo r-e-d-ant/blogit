@@ -30,7 +30,7 @@ export default {
         },
     },
     beforeUnmount() {
-        console.log('beforeUnmount');
+      this.$store.commit("toggleEditPost", false);
     }
 };
 </script>
