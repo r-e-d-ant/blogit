@@ -14,7 +14,7 @@
     <div class="updates">
       <div class="container">
         <h2>never miss a post. Register for your free account today!</h2>
-        <router-link class="router-button" to="#"> Register for FireBlogs <i class='bx bx-right-arrow-alt'></i> </router-link>
+        <router-link class="router-button" :to="{ name: 'Register' }"> Register for FireBlogs <i class='bx bx-right-arrow-alt'></i> </router-link>
       </div>
     </div>
   </div>
