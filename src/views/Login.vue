@@ -15,11 +15,12 @@
                   <input type="password" placeholder="Password" v-model="password" />
                   <i class='bx bxs-lock-alt icon' ></i>
               </div>
+              <div v-show="error" class="error">{{ this.errorMsg }}</div>
           </div>
           <router-link class="forgot-password" :to="{ name: 'ForgotPassword' }">
               Forgot your password?
           </router-link>
-          <button>Sign In</button>
+          <button @click.prevent="signIn">Sign In</button>
           <div class="angle"></div>
       </form>
       <div class="background"></div>
@@ -27,14 +28,35 @@
 </template>
 
 <script>
+import { getAuth, signInWithEmailAndPassword, currentUser } from "firebase/auth"
 export default {
     name: "Login",
     data() {
         return {
-            email: null,
-            password: null,
+            email: "",
+            password: "",
+            error: null,
+            errorMsg: "",
         }
     },
+    methods: {
+      signIn() {
+        const auth = getAuth();
+        signInWithEmailAndPassword(auth, this.email, this.password)
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          this.$router.push({ name: "Home" })
+          this.error = false;
+          this.errorMsg = "";
+          console.log(auth.currentUser.uid);
+        })
+        .catch((error) => {
+          this.error = true;
+          this.errorMsg = error.message;
+        })
+      }
+    }
 }
 </script>
 
