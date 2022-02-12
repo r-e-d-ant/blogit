@@ -1,5 +1,7 @@
 <template>
-  
+    <div>
+        Hello, Blogs HERE.
+    </div>
 </template>
 
 <script>
