@@ -84,7 +84,7 @@ header {
       .header {
         font-weight: 600;
         font-size: 24px;
-        color: #000;
+        color: #303030;
         text-decoration: none;
       }
     }
