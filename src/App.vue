@@ -11,6 +11,7 @@
 <script>
 import Navigation from "./components/Navigation"
 import Footer from "./components/Footer"
+import { getAuth, onAuthStateChanged } from "firebase/auth"
 
 export default {
   components: { Navigation, Footer },
@@ -19,7 +20,17 @@ export default {
       navigation: null
     }
   },
-  created() {},
+  created() {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      this.$store.commit("updateUser", user);
+      if (user) {
+        this.$store.dispatch("getCurrentUser");
+        console.log(this.$store.state.profileEmail)
+      }
+    })
+    this.checkRoute();
+  },
   methods: {
     checkRoute() {
       if (

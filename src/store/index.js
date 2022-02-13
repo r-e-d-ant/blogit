@@ -25,6 +25,9 @@ export default createStore({
     toggleEditPost(state, payload) {
       state.editPost = payload;
     },
+    updateUser(state, payload) {
+      state.user = payload;
+    },
     setProfileInfo(state, doc) {
       state.profileId = doc.id;
       state.profileEmail = doc.data().email;
@@ -43,6 +46,7 @@ export default createStore({
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
+        console.log(docSnap.data())
         commit("setProfileInfo", docSnap);
         commit("setProfileInitials");
       } else {
