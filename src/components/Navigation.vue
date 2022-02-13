@@ -25,11 +25,11 @@
                    </div>
                    <div class="options">
                      <div>
-                       <router-link class="option" to="#">
+                       <router-link class="option" :to="{ name: 'Profile' }">
                          <i class='bx bx-user'></i>
                          <p>Profile</p>
                        </router-link>
-                       <router-link class="option" to="#">
+                       <router-link class="option" :to="{ name: 'Admin' }">
                          <i class='bx bx-crown'></i>
                          <p>Admin</p>
                        </router-link>
