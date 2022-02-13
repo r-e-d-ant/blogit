@@ -11,7 +11,6 @@
 <script>
 import Navigation from "./components/Navigation"
 import Footer from "./components/Footer"
-import { getAuth } from "firebase/auth"
 
 export default {
   components: { Navigation, Footer },
@@ -20,11 +19,7 @@ export default {
       navigation: null
     }
   },
-  created() {
-    const auth = getAuth();
-    console.log(auth.currentUser);
-    this.checkRoute();
-  },
+  created() {},
   methods: {
     checkRoute() {
       if (
