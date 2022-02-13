@@ -46,7 +46,6 @@ export default createStore({
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
-        console.log(docSnap.data())
         commit("setProfileInfo", docSnap);
         commit("setProfileInitials");
       } else {
