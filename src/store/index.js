@@ -36,7 +36,8 @@ export default createStore({
       state.profileUsername = doc.data().username;
     },
     setProfileInitials(state) {
-      state.profileInitials = state.profileFirstName.match(/(\b\$)?/g).join("") + state.profileLastName.match(/(\b\$)?/g).join("");
+      state.profileInitials =
+        state.profileFirstName.match(/(\b\S)?/g).join("") + state.profileLastName.match(/(\b\S)?/g).join("");
     }
   },
   actions: {

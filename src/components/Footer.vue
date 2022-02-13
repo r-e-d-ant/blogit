@@ -24,10 +24,9 @@
           <ul>
             <router-link class="link" :to="{ name: 'Home' }">Home</router-link>
             <router-link class="link" :to="{ name: 'Blogs' }">Blogs</router-link>
-            <!-- <router-link v-if="admin" class="link" :to="{ name: 'Home' }">Create Post</router-link>
-            <router-link v-if="!user" class="link" :to="{ name: 'Home' }">Login In / Register</router-link> -->
+            <!-- <router-link v-if="admin" class="link" :to="{ name: 'Home' }">Create Post</router-link> -->
             <router-link class="link" to="#">Create Post</router-link>
-            <router-link class="link" :to="{ name: 'Login' }">Login In / Register</router-link>
+            <router-link v-if="!user" class="link" :to="{ name: 'Login' }">Login In / Register</router-link>
           </ul>
         </div>
       </div>
@@ -42,7 +41,11 @@
 export default {
   name: "footer-vue",
   components: {},
-  computed: {},
+  computed: {
+    user() {
+      return this.$store.state.user;
+    }
+  },
 };
 </script>
 

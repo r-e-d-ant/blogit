@@ -8,7 +8,7 @@
           <h2>Login to BlogIt</h2>
           <div class="inputs">
               <div class="input">
-                  <input type="text" placeholder="Email" v-model="email" />
+                  <input type="text" placeholder="Email" v-model="email" ref="email" onfocus="this.select()" />
                   <i class='bx bx-envelope icon'></i>
               </div>
               <div class="input">
@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { getAuth, signInWithEmailAndPassword, currentUser } from "firebase/auth"
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
 export default {
     name: "Login",
     data() {
@@ -36,20 +36,29 @@ export default {
             email: "",
             password: "",
             error: null,
-            errorMsg: "",
+            errorMsg: ""
         }
+    },
+    mounted() {
+      // get recent login email in local storage if available
+      if (localStorage.getItem("blogItRecentSignInEmail")) {
+        this.$refs.email.addEventListener("focus", () => {
+          this.$refs.email.value = localStorage.getItem("blogItRecentSignInEmail")
+        })
+      }
     },
     methods: {
       signIn() {
+        // save recent login email in local storage
+        localStorage.setItem("blogItRecentSignInEmail", this.email)
+        
         const auth = getAuth();
         signInWithEmailAndPassword(auth, this.email, this.password)
-        .then((userCredential) => {
+        .then(() => {
           // Signed in
-          const user = userCredential.user;
           this.$router.push({ name: "Home" })
           this.error = false;
           this.errorMsg = "";
-          console.log(auth.currentUser.uid);
         })
         .catch((error) => {
           this.error = true;
