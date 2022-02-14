@@ -29,9 +29,21 @@ export default {
     methods: {
         async addAdmin() {
           const functions = getFunctions();
-          const addAdmin = await httpsCallable(functions, "addAdminRole");
-          const result = await addAdmin({ email: this.adminEmail });
-          this.functionMsg = result.data.message;
+          const adminRole = await httpsCallable(functions, "addAdminRole");
+          adminRole({ email: this.adminEmail })
+          .then((result) => {
+            const data = result.data;
+            this.functionMsg = data.message;
+          })
+          .catch((error) => {
+            // Getting the Error details.
+            const code = error.code;
+            const message = error.message;
+            const details = error.details;
+            console.log(code);
+            console.log(message);
+            console.log(details);
+          });
         }
     }
 }
