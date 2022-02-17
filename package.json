@@ -7,8 +7,10 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "@firebase/auth": "^0.19.8",
     "core-js": "^3.6.5",
     "firebase": "^9.6.6",
+    "firebase-admin": "^10.0.2",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",
     "vuex": "^4.0.0-0"

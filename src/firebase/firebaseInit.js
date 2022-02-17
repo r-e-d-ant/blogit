@@ -23,4 +23,6 @@ const functions = getFunctions(app);
 // Init services
 const db = getFirestore(app);
 
+export { functions }
+
 export default db;

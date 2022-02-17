@@ -8,15 +8,15 @@
           <input placeholder="Enter user email to make them an admin" type="text" id="addAdmins" v-model="adminEmail" />
         </div>
         <span>{{ this.functionMsg }}</span>
-        <button @click="addAdmin" class="button">Submit</button>
+        <button @click.prevent="addAdmin" class="button">Submit</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-// import { functions } from "../firebase/firebaseInit"
-import { getFunctions, httpsCallable } from "firebase/functions"
+import { functions } from "../firebase/firebaseInit"
+import { httpsCallable } from "firebase/functions"
 
 export default {
     name: "Admin",
@@ -28,7 +28,6 @@ export default {
     },
     methods: {
         async addAdmin() {
-          const functions = getFunctions();
           const adminRole = await httpsCallable(functions, "addAdminRole");
           adminRole({ email: this.adminEmail })
           .then((result) => {

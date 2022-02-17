@@ -14,6 +14,7 @@ export default createStore({
     ],
     editPost: null,
     user: null,
+    profileAdmin: null,
     profileEmail: null,
     profileFirstName: null,
     profileLastName: null,
@@ -27,6 +28,9 @@ export default createStore({
     },
     updateUser(state, payload) {
       state.user = payload;
+    },
+    setProfileAdmin(state, payload) {
+      state.profileAdmin = payload;
     },
     setProfileInfo(state, doc) {
       state.profileId = doc.id;
@@ -50,7 +54,7 @@ export default createStore({
     }
   },
   actions: {
-    async getCurrentUser({ commit }) {
+    async getCurrentUser({ commit }, user) {
       const auth = getAuth();
       const docRef = doc(db, "users", auth.currentUser.uid);
       const docSnap = await getDoc(docRef);
@@ -58,8 +62,11 @@ export default createStore({
       if (docSnap.exists()) {
         commit("setProfileInfo", docSnap);
         commit("setProfileInitials");
+        const token = await user.getIdTokenResult();
+        const admin = await token.claims.admin;
+        commit("setProfileAdmin", admin);
       } else {
-        console.log("No such document")
+        console.log("No such document");
       }
     },
     async updateUserSettings({ commit, state}) {
